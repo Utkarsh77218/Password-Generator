@@ -15,6 +15,10 @@ export class PasswordGeneratorComponent {
   includeNumbers: boolean = false;
   includeSpecialCharacters: boolean = false;
 
+  clamp(num: number): number {
+    return Math.min(Math.max(num, 1), 100);
+  }
+
   generatePassword(): void {
     let characters = '';
     let password = '';
@@ -30,7 +34,7 @@ export class PasswordGeneratorComponent {
     if (this.includeSpecialCharacters) {
       characters += '!@#$%^&*()_+~`|}{[]:;?><,./';
     }
-    
+
     for (let i = 0; i < this.passwordLength; i++) {
       const randomIndex = Math.floor(Math.random() * characters.length);
       password += characters[randomIndex];
