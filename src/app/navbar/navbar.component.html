@@ -1,11 +1,9 @@
-<nav class="bg-white shadow-md">
+<nav class="bg-white shadow-md h-14">
     <div class="container mx-auto flex justify-between items-center px-4 py-2">
-        <!-- Logo -->
         <div class="text-2xl font-bold cursor-pointer text-[#1a285f]">
             <span>&lt;</span>Pass<span>Gen</span><span>/&gt;</span>
         </div>
 
-        <!-- Hamburger Menu (Small Screens) -->
         <button 
             class="lg:hidden text-gray-700 focus:outline-none" 
             (click)="toggleMenu()"
@@ -15,7 +13,6 @@
             </svg>
         </button>
 
-        <!-- Navigation Links -->
         <div 
             [ngClass]="{ 'hidden': !menuOpen, 'flex': menuOpen }" 
             class="flex-col lg:flex lg:flex-row lg:items-center lg:gap-6 absolute lg:static bg-white lg:bg-transparent top-16 left-0 w-full lg:w-auto z-10 lg:mt-0"
@@ -24,7 +21,6 @@
             <a href="#" class="block text-gray-700 hover:text-black px-4 py-2 lg:py-0">Resources</a>
             <a href="#" class="block text-gray-700 hover:text-black px-4 py-2 lg:py-0">Pricing</a>
 
-            <!-- Sign-In Button -->
             <button class="bg-blue-500 text-white py-2 px-6 rounded-full hover:bg-blue-700 transition mt-4 lg:mt-0 lg:ml-6">
                 Sign In
             </button>
