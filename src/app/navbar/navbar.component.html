@@ -2,53 +2,27 @@
     <div class="mycontainer flex justify-between items-center px-4 py-5 h-14">
         <div class="flex items-center justify-center">
             <div class="logo font-bold text-2xl cursor-pointer">
-                <span class="text-[#1a285f]">&lt;</span>Pass<span
-                    class="text-[#1a285f]"
-                    >Gen</span
-                >
+                <span class="text-[#1a285f]">&lt;</span>Pass<span class="text-[#1a285f]">Gen</span>
                 <span class="text-[#1a285f]">/&gt;</span>
             </div>
-        </div>
-        <div 
-            [ngClass]="{'hidden': !menuOpen, 'flex': menuOpen}" 
-            class="flex-col lg:flex-row lg:flex gap-6 lg:items-center w-full lg:w-auto mt-4 lg:mt-0 hidden"
-        >
-            <p class="cursor-pointer text-gray-600 hover:text-black font-bold text-center lg:text-left">
+            <p
+                class="ml-4 cursor-pointer text-gray-600 hover:text-black font-bold"
+            >
                 Products
             </p>
-            <p class="cursor-pointer text-gray-600 hover:text-black font-bold text-center lg:text-left">
+            <p
+                class="ml-4 cursor-pointer text-gray-600 hover:text-black font-bold"
+            >
                 Resources
             </p>
-            <p class="cursor-pointer text-gray-600 hover:text-black font-bold text-center lg:text-left">
+            <p
+                class="ml-4 cursor-pointer text-gray-600 hover:text-black font-bold"
+            >
                 Pricing
             </p>
-
-            <!-- Sign In Button -->
-            <div class="flex justify-center lg:justify-end mt-4 lg:mt-0">
-                <button class="bg-blue-500 text-white p-2 px-6 rounded-3xl hover:bg-blue-700 transition">
-                    Sign In
-                </button>
-            </div>
         </div>
-        <!-- Hamburger Menu (Visible on small screens) -->
-        <button
-            class="lg:hidden ml-auto text-gray-600 hover:text-black focus:outline-none"
-            (click)="toggleMenu()"
-        >
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                class="w-6 h-6"
-            >
-                <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M3.75 6h16.5M3.75 12h16.5m-16.5 6h16.5"
-                />
-            </svg>
-        </button>
+        <div class="flex items-center justify-center">
+            <button class="bg-blue-500 text-white p-2 px-6 rounded-3xl hover:bg-blue-700 transition">Sign In</button>
+        </div>
     </div>
 </nav>
