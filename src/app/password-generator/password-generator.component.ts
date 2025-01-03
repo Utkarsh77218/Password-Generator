@@ -19,6 +19,10 @@ export class PasswordGeneratorComponent {
     return Math.min(Math.max(num, 1), 100);
   }
 
+  copyText() {
+    navigator.clipboard.writeText(this.generatedPassword);
+  }
+
   generatePassword(): void {
     let characters = '';
     let password = '';
