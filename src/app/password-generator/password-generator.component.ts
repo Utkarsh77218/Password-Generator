@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -5,7 +6,7 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-password-generator',
   templateUrl: './password-generator.component.html',
   styleUrl: './password-generator.component.css',
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   standalone: true,
 })
 export class PasswordGeneratorComponent {
@@ -14,13 +15,19 @@ export class PasswordGeneratorComponent {
   includeAlphabets: boolean = true;
   includeNumbers: boolean = false;
   includeSpecialCharacters: boolean = false;
+  copyButtonText: string = 'Copy Password';
 
   clamp(num: number): number {
     return Math.min(Math.max(num, 1), 100);
   }
 
-  copyText() {
+  copyText(): void {
     navigator.clipboard.writeText(this.generatedPassword);
+    this.copyButtonText = 'Copied!';
+
+    setTimeout(() => {
+      this.copyButtonText = 'Copy Password';
+    }, 2000);
   }
 
   generatePassword(): void {
@@ -38,6 +45,8 @@ export class PasswordGeneratorComponent {
     if (this.includeSpecialCharacters) {
       characters += '!@#$%^&*()_+~`|}{[]:;?><,./';
     }
+
+    
 
     for (let i = 0; i < this.passwordLength; i++) {
       const randomIndex = Math.floor(Math.random() * characters.length);
