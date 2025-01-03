@@ -16,6 +16,11 @@ export class PasswordGeneratorComponent {
   includeNumbers: boolean = false;
   includeSpecialCharacters: boolean = false;
   copyButtonText: string = 'Copy Password';
+  isSelectionValid: boolean = true;
+
+  validateSelection(): void {
+    this.isSelectionValid = this.includeAlphabets || this.includeNumbers;
+  }
 
   clamp(num: number): number {
     return Math.min(Math.max(num, 1), 100);
