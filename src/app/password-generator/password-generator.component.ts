@@ -35,28 +35,47 @@ export class PasswordGeneratorComponent {
     }, 2000);
   }
 
+  shuffle(characters: string): string {
+    const chars = characters.split('');
+
+    for (let i = chars.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [chars[i], chars[j]] = [chars[j], chars[i]];
+    }
+
+    return chars.join('');
+  }
+
   generatePassword(): void {
-    let characters = '';
     let password = '';
+    let characters = '';
 
-    if (this.includeAlphabets) {
-      characters += 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    if(this.includeAlphabets) {
+      const alphabets = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      characters += alphabets;
+      password += alphabets[Math.floor(Math.random() * alphabets.length)];
     }
 
-    if (this.includeNumbers) {
-      characters += '1234567890';
+    if(this.includeNumbers) {
+      const numbers = '1234567890';
+      characters += numbers;
+      password += numbers[Math.floor(Math.random() * numbers.length)];
     }
 
-    if (this.includeSpecialCharacters) {
-      characters += '!@#$%^&*()_+~`|}{[]:;?><,./';
+    if(this.includeSpecialCharacters) {
+      const symbols = '!@#$%^&*()_+~`|}{[]:;?><,./';
+      characters += symbols;
+      password += symbols[Math.floor(Math.random() * symbols.length)];
     }
 
-    
+    characters = this.shuffle(characters);
 
-    for (let i = 0; i < this.passwordLength; i++) {
+    for (let i = password.length; i < this.passwordLength; i++) {
       const randomIndex = Math.floor(Math.random() * characters.length);
       password += characters[randomIndex];
     }
+
+    password = this.shuffle(password);
 
     this.generatedPassword = password;
   }
