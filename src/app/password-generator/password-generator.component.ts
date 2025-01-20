@@ -22,10 +22,6 @@ export class PasswordGeneratorComponent {
     this.isSelectionValid = this.includeAlphabets || this.includeNumbers;
   }
 
-  clamp(num: number): number {
-    return Math.min(Math.max(num, 1), 100);
-  }
-
   copyText(): void {
     navigator.clipboard.writeText(this.generatedPassword);
     this.copyButtonText = 'Copied!';
@@ -47,36 +43,64 @@ export class PasswordGeneratorComponent {
   }
 
   generatePassword(): void {
-    let password = '';
+    // UPDATE - Changed password string to be an array of strings to store each character at random indexes
+    let passwordArray: string[] = [];
     let characters = '';
-
-    if(this.includeAlphabets) {
+  
+    // Adding alphabets if selected
+    if (this.includeAlphabets) {
       const alphabets = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      const randomChar = alphabets[Math.floor(Math.random() * alphabets.length)];
+      const randomIndex = Math.floor(Math.random() * this.passwordLength);
+
       characters += alphabets;
-      password += alphabets[Math.floor(Math.random() * alphabets.length)];
+      passwordArray[randomIndex] = randomChar;
     }
-
-    if(this.includeNumbers) {
+  
+    // Adding numbers if selected
+    if (this.includeNumbers) {
       const numbers = '1234567890';
+      let randomChar;
+      let randomIndex;
+      
+      // Using do while to not overwrite the character set in the previous if statement
+      do {
+        randomChar = numbers[Math.floor(Math.random() * numbers.length)];
+        randomIndex = Math.floor(Math.random() * this.passwordLength);
+      } while (passwordArray[randomIndex] !== undefined);
+
       characters += numbers;
-      password += numbers[Math.floor(Math.random() * numbers.length)];
+      passwordArray[randomIndex] = randomChar;
     }
-
-    if(this.includeSpecialCharacters) {
+  
+    // Adding special characters if selected
+    if (this.includeSpecialCharacters) {
       const symbols = '!@#$%^&*()_+~`|}{[]:;?><,./';
+      let randomChar;
+      let randomIndex;
+      
+      // Using do while to not overwrite the character set in the previous if statement
+      do {
+        randomChar = symbols[Math.floor(Math.random() * symbols.length)];
+        randomIndex = Math.floor(Math.random() * this.passwordLength);
+      } while (passwordArray[randomIndex] !== undefined);
+
       characters += symbols;
-      password += symbols[Math.floor(Math.random() * symbols.length)];
+      passwordArray[randomIndex] = randomChar;
     }
 
+    // Shuffling the characters array to generate a random array for character selection.
     characters = this.shuffle(characters);
 
-    for (let i = password.length; i < this.passwordLength; i++) {
-      const randomIndex = Math.floor(Math.random() * characters.length);
-      password += characters[randomIndex];
+    // Filling the remaining slots with random characters
+    for (let i = 0; i < this.passwordLength; i++) {
+      if (passwordArray[i] === undefined) {
+        const randomChar = characters[Math.floor(Math.random() * characters.length)];
+        passwordArray[i] = randomChar;
+      }
     }
-
-    password = this.shuffle(password);
-
-    this.generatedPassword = password;
+  
+    // Joining the array into a string and setting it to generated password
+    this.generatedPassword = passwordArray.join('');
   }
 }
